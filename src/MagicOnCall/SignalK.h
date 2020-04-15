@@ -421,8 +421,10 @@ class NMEAenvironment {
         xTotal = xTotal - xReadings[readIndex];
         yTotal = yTotal - yReadings[readIndex];
         // read from the sensor:
-        xReadings[readIndex] = WindSpeedApparent*cos(WindAngleApparent/180.0*3.1415926535897932384626433832795);
-        yReadings[readIndex] = WindSpeedApparent*sin(WindAngleApparent/180.0*3.1415926535897932384626433832795);
+        //xReadings[readIndex] = WindSpeedApparent*cos(WindAngleApparent/180.0*3.1415926535897932384626433832795);
+        xReadings[readIndex] = WindSpeedApparent*cos(WindAngleApparent);
+        //yReadings[readIndex] = WindSpeedApparent*sin(WindAngleApparent/180.0*3.1415926535897932384626433832795);
+        yReadings[readIndex] = WindSpeedApparent*sin(WindAngleApparent);
         // add the reading to the total:
         xTotal = xTotal + xReadings[readIndex];
         yTotal = yTotal + yReadings[readIndex];
