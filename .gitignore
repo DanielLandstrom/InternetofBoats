@@ -1,3 +1,7 @@
+src/MagicOnCall/a_personal_*.h
+a_personal_*.h
+!a_personal_generic.h
+
 # Prerequisites
 *.d
 
