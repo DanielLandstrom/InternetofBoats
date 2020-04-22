@@ -225,7 +225,7 @@ void mqttReconnect() {
     while (!mqttClient.connected()) {
     
     // Attemp to connect
-    if (mqttClient.connect(MQTT_CLIENT_NAME, personalData.mqttUser, personalData.mqttPassword, MQTT_TOPIC_STATUS, 0, 1, "offline")) {   
+    if (mqttClient.connect(MQTT_CLIENT_NAME , personalData.mqttUser, personalData.mqttPassword, MQTT_TOPIC_STATUS, 0, 1, "offline")) {   
       //Updated
       if (status_debug) { Serial.println(" - MQTT Connected"); }
       // Once connected, publish an announcement...

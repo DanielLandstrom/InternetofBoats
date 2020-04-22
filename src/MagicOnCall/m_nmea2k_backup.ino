@@ -30,13 +30,13 @@
 #include <N2kMessages.h>
 #include <N2kMessagesEnumToStr.h>
 
-void HandleNMEA2000Msg(const tN2kMsg &N2kMsg);
 
 typedef struct {
   unsigned long PGN;
   void (*Handler)(const tN2kMsg &N2kMsg); 
 } tNMEA2000Handler;
 
+void HandleNMEA2000Msg(const tN2kMsg &N2kMsg);  
 
 void Wind(const tN2kMsg &N2kMsg);
 void SystemTime(const tN2kMsg &N2kMsg);
@@ -144,7 +144,7 @@ void nmea2k_setup() {
   //NMEA2000.SetDebugMode(tNMEA2000::dm_ClearText); // Uncomment this, so you can test code without CAN bus chips on Arduino Mega
   NMEA2000.EnableForward(false); // Disable all msg forwarding to USB (=Serial)
 
-  //NMEA2000.SetMsgHandler(HandleNMEA2000Msg);
+  NMEA2000.SetMsgHandler(HandleNMEA2000Msg);
 
   NMEA2000.Open();
 
@@ -170,7 +170,8 @@ void Wind(const tN2kMsg &N2kMsg) {
          
     if (ParseN2kWindSpeed(N2kMsg, WindInstance, WindSpeed, WindAngle, WindReference) ) {
       
-      nmeaWind.setWindData(WindInstance, WindSpeed, RadToDeg(WindAngle));
+      nmeaWind.setWindData(WindInstance, WindSpeed, RadToDeg(WindAngle)); // Orginal
+      //nmeaWind.setWindData(WindInstance, WindSpeed, WindAngle);
       //environment.setWindData(WindInstance, WindSpeed, RadToDeg(WindAngle));
       environment.setWindData(WindInstance, WindSpeed, WindAngle);
       

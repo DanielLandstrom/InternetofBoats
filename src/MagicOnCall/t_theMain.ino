@@ -375,11 +375,14 @@ void loop(void)
   // teporary disabled as to not fog the mqtt debugging
   nmea2k_loop();
   winds = nmeaWind.getWindSpeed();
-  windd = nmeaWind.getWindDirection();
-  SKwinds = environment.getWindSpeedApparent();
+  windd = nmeaWind.getWindDirection();  // Orginal
+  //windd = RadToDeg(nmeaWind.getWindDirection());
+  //SKwinds = environment.getWindSpeedApparent();
   
-  winds = environment.getWindSpeedApparent();
-  windd = environment.getWindAngleApparent();
+//  winds = environment.getWindSpeedApparent();
+//  windd = environment.getWindAngleApparent();
+  SKwinds = msToKnots(environment.getWindSpeedApparent());
+  SKwindd = RadToDeg(environment.getWindAngleApparent());
 
 
   systemDate = nmeaNav.getSystemDate();
@@ -389,7 +392,7 @@ void loop(void)
   // Display data in the LCD display
   lcd.setCursor(0,2);
 //  lcd.print("Wind: " + environment.getWindSpeedApparent().toString() + " " + environment.getWindAngleApparent().toString() + "deg");
-   lcd.print("Wind: " + (String)environment.getWindSpeedApparent() + " " + (String)environment.getWindAngleApparent() + "deg");
+   lcd.print("Wind: " + (String) msToKnots(environment.getWindSpeedApparent()) + " " + (String) RadToDeg(environment.getWindAngleApparent()) + "deg");
 //  lcd.print("Wind: " + (String)environment.getWindSpeedApparent() );
 //  lcd.setCursor(1,3);
 //  lcd.print("IP: " + WiFi.localIP().toString() );
