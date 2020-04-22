@@ -247,7 +247,7 @@ class NMEAenvironment {
     double _TideTimeLow                             = 0.0;
     double _TideTimeHigh                            = 0.0;
     double _Heave                                   = 0.0;
-    double _WindAngleApparent                       = 0.0;
+    double _WindAngleApparent                       = 0.0;  
     double _WindAngleTrueGround                     = 0.0;
     double _WindAngleTrueWater                      = 0.0;
     double _WindDirectionChangeAlarm                = 0.0;
@@ -255,7 +255,7 @@ class NMEAenvironment {
     double _WindDirectionMagnetic                   = 0.0;
     double _WindSpeedTrue                           = 0.0;
     double _WindSpeedOverGround                     = 0.0;
-    double _WindSpeedApparent                       = 0.0;
+    double _WindSpeedApparent                       = 0.0;  
     unsigned char _WindInstance;
     
     unsigned long _Time                             = 0;
@@ -421,10 +421,10 @@ class NMEAenvironment {
         xTotal = xTotal - xReadings[readIndex];
         yTotal = yTotal - yReadings[readIndex];
         // read from the sensor:
-        //xReadings[readIndex] = WindSpeedApparent*cos(WindAngleApparent/180.0*3.1415926535897932384626433832795);
         xReadings[readIndex] = WindSpeedApparent*cos(WindAngleApparent);
-        //yReadings[readIndex] = WindSpeedApparent*sin(WindAngleApparent/180.0*3.1415926535897932384626433832795);
         yReadings[readIndex] = WindSpeedApparent*sin(WindAngleApparent);
+        //xReadings[readIndex] = WindSpeedApparent*cos(WindAngleApparent/180.0*3.1415926535897932384626433832795);
+        //yReadings[readIndex] = WindSpeedApparent*sin(WindAngleApparent/180.0*3.1415926535897932384626433832795);
         // add the reading to the total:
         xTotal = xTotal + xReadings[readIndex];
         yTotal = yTotal + yReadings[readIndex];
@@ -443,12 +443,13 @@ class NMEAenvironment {
       
         // Transform to polar coordinates 
         _WindSpeedApparent = sqrt(xAverage*xAverage + yAverage*yAverage);
-        _WindAngleApparent = atan2(yAverage,xAverage)*180.0/3.1415926535897932384626433832795;
+        _WindAngleApparent = atan2(yAverage,xAverage);
+        //_WindAngleApparent = atan2(yAverage,xAverage)*180.0/3.1415926535897932384626433832795;
       // 3. Store the data in the class internal variables 
         //this->_WindInstance           = WindInstance;
-        _WindSpeedApparent      = WindSpeedApparent;  // UnAveraged, to compare with for pipecleaning
+//_WindSpeedApparent      = WindSpeedApparent;  // UnAveraged, to compare with for pipecleaning
         //this->_WindSpeedApparent      = sqrt(xAverage*xAverage + yAverage*yAverage);
-        _WindAngleApparent      = WindAngleApparent;  // UnAveraged, to compare with for pipecleaning
+//_WindAngleApparent      = WindAngleApparent;  // UnAveraged, to compare with for pipecleaning
         //this->_WindAngleApparent      = atan2(yAverage,xAverage)*180.0/3.1415926535897932384626433832795;
         //this->_WindAngleApparent      = (360.0 + atan2(yAverage,xAverage)*180.0/3.1415926535897932384626433832795) / 360.0;
         // this->_WindAngleApparent      = (360 + atan2(yAverage,xAverage)*180.0/3.1415926535897932384626433832795) % 360;

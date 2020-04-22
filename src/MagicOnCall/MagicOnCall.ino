@@ -158,10 +158,11 @@ float temp = 0.0;
 uint16_t systemDate = 0;
 double systemTime = 0.0;
 double SeaTemp = 0.0;
+
 double winds = 0.0;
 double windd = 0.0;
-
-double SKwinds = 11.0;
+double SKwinds = 0.0;
+double SKwindd = 0.0;
 
 
 // Function used in the webserver to publish data
@@ -200,9 +201,9 @@ String  SendHTML(boolean led1stat, boolean led2stat, float batteryvoltage, float
   html_meassage +="<th>House battery:<br>"  + (String) batteryvoltage  + " volt</th>\n";
   html_meassage +="<th>Start battery:<br>"  + (String) startbatterylevel  + " volt</th>\n";
   html_meassage +="</tr>\n <tr>\n";  
-  html_meassage +="<td>Wind speed:<br> "    + (String) winds  + " m/s</td>\n";
-  html_meassage +="<td>Wind angle:<br> "    + (String) windd + " deg</td>\n";
-  html_meassage +="<td>Speed:<br> "         + (String) temp  + " knop</td>\n";
+  html_meassage +="<th>Wind speed:<br> "    + (String) SKwinds  + " knop</td>\n";
+  html_meassage +="<th>Wind angle:<br> "    + (String) SKwindd + " deg</td>\n";
+  html_meassage +="<th>Speed:<br> "         + (String) temp  + " knop</td>\n";
 /*
   html_meassage +="</tr>\n <tr>\n";  
   html_meassage +="<td>3Battery level:<br>" + (String) batteryvoltage  + " volt</td>\n";
